@@ -1,4 +1,9 @@
 
+import Data.Char (chr, ord)
+import Data.Char
+
+
+
 -- 2.1 -
 
 -- a )
@@ -193,4 +198,65 @@ pascal n =  [[ binom i j | j <- [0..i]] | i <- [0..n]]
 
 
 
--- 2.15
+-- 2.15 -
+
+letraInt :: Char -> Int
+letraInt c = ord c - ord 'A'
+
+intLetra :: Int -> Char
+intLetra n = chr (n + ord 'A')
+
+maiuscula :: Char -> Bool
+maiuscula x = x >='A' && x <= 'Z'
+
+desloca :: Int -> Char -> Char
+desloca k x
+  | maiuscula x = intLetra ((letraInt x + k) `mod` 26)
+  | otherwise = x
+
+cifrar :: Int -> String -> String
+cifrar k xs = [desloca k x | x <- xs]
+
+
+
+-- 2.16 -
+
+concat1 :: [[a]] -> [a]
+concat1 a = [ x | b <- a, x <- b ]
+
+replicate2 :: Int -> a -> [a]
+replicate2 a b = [ b | x <- [1..a] ]
+
+twoexclamations :: [a] -> Int -> a
+twoexclamations a b = head [ x | (x,y) <- zip a [0..b], y == b]
+
+
+
+-- 2.17 -
+
+forte :: String -> Bool
+
+forte x = (length x >= 8) && letraMaiuscula && letraMiniscula && algarismo
+  where
+    letraMaiuscula = peloMenosUm isUpper x
+    letraMiniscula = peloMenosUm isLower x
+    algarismo = peloMenosUm isDigit x
+    peloMenosUm a b = length [ y | y <- b, a y] >= 1
+
+
+
+-- 2.18 -
+
+-- a )
+
+mindiv :: Int -> Int
+
+mindiv x
+  | null a = x
+  | otherwise = head a
+  where a = [ n | n <- [2..floor (sqrt (fromIntegral x))], x`mod`n == 0]
+
+
+-- b )
+
+bestIsPrime x = x > 1 && mindiv x == x
