@@ -43,3 +43,7 @@ nivel n (No x arv1 arv2) = nivel (n-1) arv1 ++ nivel (n-1) arv2
 mapArv :: (a -> b) -> Arv a -> Arv b
 
 mapArv f (No x arv1 arv2) = No (f x) (mapArv f arv1) (mapArv f arv2)
+
+
+
+-- 4.5 -

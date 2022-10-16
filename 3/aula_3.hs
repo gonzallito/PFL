@@ -1,5 +1,6 @@
 
 import Data.List
+import Data.List.Split
 
 -- 3.1 -
 
@@ -104,3 +105,15 @@ reverseFoldl = foldl (\x y -> y:x) []
 elemAny :: Eq a => a -> [a] -> Bool
 
 elemAny x y = any (x==) y
+
+
+
+-- 3.8 -
+
+palavras :: String → [String]
+
+palavras [] = []
+palavras [x] = [x]
+palavras (x:xs)
+  | x == ' ' = palavras ++ [x]
+  | otherwise
